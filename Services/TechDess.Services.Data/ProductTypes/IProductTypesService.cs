@@ -9,6 +9,6 @@
     {
         Task CreateAsync(ProductTypeInputModel input);
 
-        IEnumerable<T> GetAll<T>(int? count = null);
+        IEnumerable<T> GetAll<T>();
     }
 }

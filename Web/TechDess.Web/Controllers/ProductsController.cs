@@ -46,5 +46,27 @@
             this.TempData["InfoMessage"] = "Product created!";
             return this.RedirectToAction("Index", "Home");
         }
+
+
+        [HttpGet]
+        public IActionResult List(SearchListInputModel input, int page = 1)
+        {
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 8;
+            var viewModel = new ProductListViewModel()
+            {
+
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = page,
+                Count = this.productsService.GetCount(),
+                Products = this.productsService.GetByProductTypes<ProductInListViewModel>(input.Id, page, ItemsPerPage),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace TechDess.Web.Controllers
+﻿using TechDess.Services.Data.ProductTypes;
+using TechDess.Web.ViewModels.Home;
+
+namespace TechDess.Web.Controllers
 {
     using System.Diagnostics;
 
@@ -7,9 +10,20 @@
 
     public class HomeController : BaseController
     {
+        private readonly IProductTypesService productTypesService;
+
+        public HomeController(IProductTypesService productTypesService)
+        {
+            this.productTypesService = productTypesService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexProductTypesViewModel()
+            {
+                ProductTypes = this.productTypesService.GetAll<IndexPageProductTypeViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

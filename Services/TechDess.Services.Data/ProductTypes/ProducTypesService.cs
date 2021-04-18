@@ -28,16 +28,11 @@
             await this.productTypeRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(int? count = null)
+        public IEnumerable<T> GetAll<T>()
         {
-            IQueryable<ProductType> query = this.productTypeRepository.All()
-                .OrderBy(x => x.Name);
-            if (count.HasValue)
-            {
-                query = query.Take(count.Value);
-            }
-
-            return query.To<T>().ToList();
+            return this.productTypeRepository.All()
+                .OrderBy(x =>x.Name)
+                .To<T>().ToList();
         }
     }
 }
