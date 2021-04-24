@@ -1,12 +1,11 @@
-﻿using TechDess.Services.Data.ProductTypes;
-using TechDess.Web.ViewModels.Home;
-
-namespace TechDess.Web.Controllers
+﻿namespace TechDess.Web.Controllers
 {
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
+    using TechDess.Services.Data.ProductTypes;
     using TechDess.Web.ViewModels;
+    using TechDess.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {

@@ -47,7 +47,6 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-
         [HttpGet]
         public IActionResult List(SearchListInputModel input, int page = 1)
         {

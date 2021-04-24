@@ -18,7 +18,7 @@
 
         public decimal Price { get; set; }
 
-        [Display(Name = "ProductType")]
+        [Display(Name = "Product Type")]
         public int ProductTypeId { get; set; }
 
         public IEnumerable<ProductTypeDropDownViewModel> ProductTypes { get; set; }
