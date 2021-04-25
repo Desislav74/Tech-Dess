@@ -243,6 +243,35 @@ namespace TechDess.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TechDess.Data.Models.Characteristic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Characteristics");
+                });
+
             modelBuilder.Entity("TechDess.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -351,6 +380,52 @@ namespace TechDess.Data.Migrations
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("TechDess.Data.Models.ProductCharacteristic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CharacteristicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Memory")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Os")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ram")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Resolution")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ScreenSizeInInches")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacteristicId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductCharacteristics");
                 });
 
             modelBuilder.Entity("TechDess.Data.Models.ProductType", b =>
@@ -536,6 +611,25 @@ namespace TechDess.Data.Migrations
                     b.Navigation("ProductType");
                 });
 
+            modelBuilder.Entity("TechDess.Data.Models.ProductCharacteristic", b =>
+                {
+                    b.HasOne("TechDess.Data.Models.Characteristic", "Characteristic")
+                        .WithMany("Products")
+                        .HasForeignKey("CharacteristicId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("TechDess.Data.Models.Product", "Product")
+                        .WithMany("Characteristics")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Characteristic");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("TechDess.Data.Models.Receipt", b =>
                 {
                     b.HasOne("TechDess.Data.Models.ApplicationUser", "User")
@@ -554,6 +648,16 @@ namespace TechDess.Data.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("TechDess.Data.Models.Characteristic", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("TechDess.Data.Models.Product", b =>
+                {
+                    b.Navigation("Characteristics");
                 });
 
             modelBuilder.Entity("TechDess.Data.Models.ProductType", b =>

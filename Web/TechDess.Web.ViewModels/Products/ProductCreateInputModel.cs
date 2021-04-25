@@ -22,5 +22,7 @@
         public int ProductTypeId { get; set; }
 
         public IEnumerable<ProductTypeDropDownViewModel> ProductTypes { get; set; }
+
+        public IEnumerable<ProductCharacteristicInputModel> Characteristics { get; set; }
     }
 }

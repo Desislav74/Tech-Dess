@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Results found";
 }
-<div class="alert alert-light text-center" role="alert">
+<div class="alert alert-light text-center text-primary" role="alert">
     <h3>@ViewData["Title"]</h3>
 </div>
 
@@ -15,12 +15,12 @@ else
     <div class="row">
         @foreach (var product in this.Model.Products)
         {
-            <div class="card col-md-3">
+            <div class="card col-md-3 border-primary ">
                 <img class="card-img-top" src="@product.Image" alt="">
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">Price:@product.Price</p>
-                    <a asp-controller="" asp-action="" asp-route-id="@product.Id" class="btn btn-dark">Specifications</a>
+                    <a asp-controller="Products" asp-action="ById" asp-route-id="@product.Id" class="btn btn-dark">Specifications</a>
                 </div>
             </div>
         }

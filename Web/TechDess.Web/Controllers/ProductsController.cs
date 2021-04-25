@@ -42,7 +42,7 @@
 
             var image = await this.cloudinaryService.UploadPictureAsync(input.Image, input.Name);
 
-            var productId = await this.productsService.CreateAsync(input.Name, input.Price, input.ProductTypeId, image);
+            var productId = await this.productsService.CreateAsync(input, image);
             this.TempData["InfoMessage"] = "Product created!";
             return this.RedirectToAction("Index", "Home");
         }
@@ -66,6 +66,12 @@
             };
 
             return this.View(viewModel);
+        }
+
+        public IActionResult ById(int id)
+        {
+            var product = this.productsService.GetById<SingleProductViewModel>(id);
+            return this.View(product);
         }
     }
 }

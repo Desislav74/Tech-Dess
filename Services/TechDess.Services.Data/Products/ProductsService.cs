@@ -13,21 +13,47 @@
    public class ProductsService : IProductsService
     {
         private readonly IDeletableEntityRepository<Product> productRepository;
+        private readonly IDeletableEntityRepository<Characteristic> characteristicRepository;
 
-        public ProductsService(IDeletableEntityRepository<Product> productRepository)
+        public ProductsService(IDeletableEntityRepository<Product> productRepository, IDeletableEntityRepository<Characteristic> characteristicRepository)
         {
             this.productRepository = productRepository;
+            this.characteristicRepository = characteristicRepository;
         }
 
-        public async Task<int> CreateAsync(string name, decimal price, int productTypeId, string image)
+        public async Task<int> CreateAsync(ProductCreateInputModel input, string image)
         {
             var product = new Product
             {
-                Name = name,
-                Price = price,
-                ProductTypeId = productTypeId,
+                Name = input.Name,
+                Price = input.Price,
+                ProductTypeId = input.ProductTypeId,
                 Image = image,
             };
+
+            foreach (var inputCharacteristic in input.Characteristics)
+            {
+                var characteristic = this.characteristicRepository.All()
+                    .FirstOrDefault(x => x.Name == inputCharacteristic.CharacteristicName);
+                if (characteristic == null)
+                {
+                    characteristic = new Characteristic() { Name = inputCharacteristic.CharacteristicName };
+                }
+
+                product.Characteristics.Add(new ProductCharacteristic()
+                {
+                    Characteristic = characteristic,
+                    Model = inputCharacteristic.Model,
+                    Weight = inputCharacteristic.Weight,
+                    Ram = inputCharacteristic.Ram,
+                    Memory = inputCharacteristic.Memory,
+                    Os = inputCharacteristic.Os,
+                    Resolution = inputCharacteristic.Resolution,
+                    Color = inputCharacteristic.Color,
+                    ScreenSizeInInches = inputCharacteristic.ScreenSizeInInches,
+                });
+            }
+
             await this.productRepository.AddAsync(product);
             await this.productRepository.SaveChangesAsync();
             return product.Id;

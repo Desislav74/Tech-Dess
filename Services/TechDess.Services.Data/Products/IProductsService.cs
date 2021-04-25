@@ -7,9 +7,11 @@
 
     public interface IProductsService
     {
-        Task<int> CreateAsync(string name, decimal price, int productTypeId, string image);
+        Task<int> CreateAsync(ProductCreateInputModel input, string image);
 
         IEnumerable<T> GetByProductTypes<T>(int id, int page, int itemsPerPage = 6);
+
+        T GetById<T>(int id);
 
         int GetCount();
     }

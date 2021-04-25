@@ -36,6 +36,10 @@
 
         public DbSet<Receipt> Receipts { get; set; }
 
+        public DbSet<Characteristic> Characteristics { get; set; }
+
+        public DbSet<ProductCharacteristic> ProductCharacteristics { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
