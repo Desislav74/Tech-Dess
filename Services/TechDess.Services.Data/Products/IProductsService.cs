@@ -1,4 +1,7 @@
-﻿namespace TechDess.Services.Data.Products
+﻿using System.Linq;
+using TechDess.Data.Models;
+
+namespace TechDess.Services.Data.Products
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -14,5 +17,11 @@
         T GetById<T>(int id);
 
         int GetCount();
+
+        IEnumerable<T> GetAllIncreasing<T>(int id, int page, int itemsPerPage = 8);
+
+        IEnumerable<T> GetAllDecreasing<T>(int id, int page, int itemsPerPage = 8);
+
+        Task DeleteAsync(int id);
     }
 }

@@ -7,6 +7,5 @@
     public class SearchListInputModel
     {
         public int Id { get; set; }
-
     }
 }

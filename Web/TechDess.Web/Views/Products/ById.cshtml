@@ -8,6 +8,17 @@
 <div class="row">
     <div class="col-sm-6">
         <img class="card-img-top" src="@Model.Image" alt="">
+        <a asp-controller="Products" asp-action="List"  class="btn btn-primary text-white btn-lg btn-block">Shop Now</a>
+        <div class="btn-group btn-group-lg" role="group" aria-label="...">
+            <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+
+            <form method="post" asp-action="DeleteProduct" id="deleteForm" asp-route-id="@Model.Id">
+            </form>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+
+            <button class="btn btn-warning" onclick="window.print()">Print</button>
+        </div>
+
     </div>
     <div class="col-sm-6 ">
         <div class="offset-5">
@@ -49,6 +60,19 @@
             </tbody>
                 </table>
             }
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Do you want to delete "@Model.Name"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
         </div>
     </div>
 </div>

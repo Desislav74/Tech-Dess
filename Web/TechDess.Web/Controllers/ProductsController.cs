@@ -58,13 +58,11 @@
             const int ItemsPerPage = 8;
             var viewModel = new ProductListViewModel()
             {
-
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = page,
                 Count = this.productsService.GetCount(),
                 Products = this.productsService.GetByProductTypes<ProductInListViewModel>(input.Id, page, ItemsPerPage),
             };
-
             return this.View(viewModel);
         }
 
@@ -72,6 +70,50 @@
         {
             var product = this.productsService.GetById<SingleProductViewModel>(id);
             return this.View(product);
+        }
+
+        public IActionResult Increasing(SearchListInputModel input, int page = 1)
+        {
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 8;
+            var viewModel = new ProductListViewModel()
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = page,
+                Count = this.productsService.GetCount(),
+                Products = this.productsService.GetAllIncreasing<ProductInListViewModel>(input.Id, page, ItemsPerPage),
+            };
+            return this.View(viewModel);
+        }
+
+        public IActionResult Decreasing(SearchListInputModel input, int page = 1)
+        {
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 8;
+            var viewModel = new ProductListViewModel()
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = page,
+                Count = this.productsService.GetCount(),
+                Products = this.productsService.GetAllDecreasing<ProductInListViewModel>(input.Id, page, ItemsPerPage),
+            };
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            await this.productsService.DeleteAsync(id);
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

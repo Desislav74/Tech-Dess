@@ -1,4 +1,6 @@
-﻿namespace TechDess.Services.Data.Products
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TechDess.Services.Data.Products
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,8 +12,9 @@
     using TechDess.Services.Mapping;
     using TechDess.Web.ViewModels.Products;
 
-   public class ProductsService : IProductsService
-    {
+
+    public class ProductsService : IProductsService
+   {
         private readonly IDeletableEntityRepository<Product> productRepository;
         private readonly IDeletableEntityRepository<Characteristic> characteristicRepository;
 
@@ -80,6 +83,37 @@
         public int GetCount()
         {
             return this.productRepository.All().Count();
+        }
+
+        public IEnumerable<T> GetAllIncreasing<T>(int id, int page, int itemsPerPage = 8)
+        {
+            var products = this.productRepository.All()
+                .Where(x => x.ProductTypeId == id)
+                .OrderBy(x => x.Price)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>().ToList();
+            return products;
+        }
+
+        public IEnumerable<T> GetAllDecreasing<T>(int id, int page, int itemsPerPage = 8)
+        {
+            var products = this.productRepository.All()
+                .Where(x => x.ProductTypeId == id)
+                .OrderByDescending(x => x.Price)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>().ToList();
+            return products;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var salon =
+                await this.productRepository
+                    .All()
+                    .Where(x => x.Id == id)
+                    .FirstOrDefaultAsync();
+            this.productRepository.Delete(salon);
+            await this.productRepository.SaveChangesAsync();
         }
     }
 }

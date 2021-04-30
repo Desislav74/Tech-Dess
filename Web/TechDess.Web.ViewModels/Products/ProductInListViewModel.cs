@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using TechDess.Data.Models;
-using TechDess.Services.Mapping;
-
-namespace TechDess.Web.ViewModels.Products
+﻿namespace TechDess.Web.ViewModels.Products
 {
+    using Microsoft.AspNetCore.Http;
+    using TechDess.Data.Models;
+    using TechDess.Services.Mapping;
+
     public class ProductInListViewModel : IMapFrom<Product>
     {
         public int Id { get; set; }
