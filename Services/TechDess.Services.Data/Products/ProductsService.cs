@@ -1,17 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace TechDess.Services.Data.Products
+﻿namespace TechDess.Services.Data.Products
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using TechDess.Data.Common.Repositories;
     using TechDess.Data.Models;
     using TechDess.Services.Data.Cloudinary;
     using TechDess.Services.Mapping;
     using TechDess.Web.ViewModels.Products;
-
 
     public class ProductsService : IProductsService
    {
@@ -66,6 +64,7 @@ namespace TechDess.Services.Data.Products
         {
             var query = this.productRepository.All().AsQueryable()
                 .Where(x => x.ProductTypeId == id)
+                .OrderByDescending(x => x.CreatedOn)
                 .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<T>().ToList();
             return query;
@@ -113,6 +112,15 @@ namespace TechDess.Services.Data.Products
                     .Where(x => x.Id == id)
                     .FirstOrDefaultAsync();
             this.productRepository.Delete(salon);
+            await this.productRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(int id, CreateEditInputModel input)
+        {
+            var product = this.productRepository.All().FirstOrDefault(x => x.Id == id);
+            product.Name = input.Name;
+            product.ProductTypeId = input.ProductTypeId;
+            product.Price = input.Price;
             await this.productRepository.SaveChangesAsync();
         }
     }

@@ -16,7 +16,6 @@
 
     <div class="form-group">
         <label asp-for="ProductTypeId"></label>
-        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
         <select asp-for="ProductTypeId" class="form-control" asp-items="productTypes"></select>
         <span asp-validation-for="ProductTypeId" class="text-danger"></span>
     </div>

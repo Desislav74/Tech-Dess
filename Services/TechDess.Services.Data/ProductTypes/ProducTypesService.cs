@@ -31,7 +31,7 @@
         public IEnumerable<T> GetAll<T>()
         {
             return this.productTypeRepository.All()
-                .OrderBy(x =>x.Name)
+                .OrderBy(x => x.Name)
                 .To<T>().ToList();
         }
     }

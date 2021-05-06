@@ -23,5 +23,7 @@ namespace TechDess.Services.Data.Products
         IEnumerable<T> GetAllDecreasing<T>(int id, int page, int itemsPerPage = 8);
 
         Task DeleteAsync(int id);
+
+        Task UpdateAsync(int id, CreateEditInputModel input);
     }
 }

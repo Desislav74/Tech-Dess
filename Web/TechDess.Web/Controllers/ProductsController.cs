@@ -1,4 +1,8 @@
-﻿namespace TechDess.Web.Controllers
+﻿using System.Collections.Generic;
+using TechDess.Data.Common.Repositories;
+using TechDess.Data.Models;
+
+namespace TechDess.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -114,6 +118,26 @@
             await this.productsService.DeleteAsync(id);
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.productsService.GetById<CreateEditInputModel>(id);
+            inputModel.ProductTypes = this.productTypesService.GetAll<ProductTypeDropDownViewModel>();
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, CreateEditInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.ProductTypes = this.productTypesService.GetAll<ProductTypeDropDownViewModel>();
+                return this.View(input);
+            }
+
+            await this.productsService.UpdateAsync(id, input);
+            return this.RedirectToAction(nameof(this.ById), new { id });
         }
     }
 }

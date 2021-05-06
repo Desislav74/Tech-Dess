@@ -7,8 +7,8 @@
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <img class="card-img-top" src="@Model.Image" alt="">
-        <a asp-controller="Products" asp-action="List"  class="btn btn-primary text-white btn-lg btn-block">Shop Now</a>
+        <div id="toprint"> <img class="card-img-top" src="@Model.Image" alt=""></div>
+        <a asp-controller="Products" asp-action="List" class="btn btn-primary text-white btn-lg btn-block">Shop Now</a>
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
             <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
 
@@ -16,49 +16,54 @@
             </form>
             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
 
-            <button class="btn btn-warning" onclick="window.print()">Print</button>
+            <button class="btn btn-warning" onclick="window.printpart()">Print</button>
         </div>
 
     </div>
     <div class="col-sm-6 ">
         <div class="offset-5">
-            <h3>Category: <a asp-controller="Products"asp-action="List"asp-route-id="@Model.ProductTypeId">@Model.ProductTypeName</a> </h3>
-            <h4>Price:@Model.Price lv.</h4>
+            <div id="toprintt">
+                <h3>Category: <a asp-controller="Products"asp-action="List"asp-route-id="@Model.ProductTypeId">@Model.ProductTypeName</a> </h3>
+                <h4>Price:@Model.Price lv.</h4>
+            </div>
         </div>
         <div class="offset-5">
-            <h3>Characteristic:</h3>
+            <div id="toprinttt"><h3>Characteristic:</h3></div>
+            
             @foreach (var characteristic in Model.Characteristics)
             {
-                <table class="table table-dark">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Second</th>
-                <th scope="col">Third</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Brand: @characteristic.CharacteristicName</td>
-                <td>Model: @characteristic.Model</td>
-                <td>Color: @characteristic.Color</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Resolution: @characteristic.Resolution</td>
-                <td>Memory: @characteristic.Memory GB</td>
-                <td>Ram: @characteristic.Ram GB</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Os: @characteristic.Os</td>
-                <td>Weight: @characteristic.Weight kg</td>
-                <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
-            </tr>
-            </tbody>
-                </table>
+                <div id="toprintttt">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Second</th>
+                            <th scope="col">Third</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Brand: @characteristic.CharacteristicName</td>
+                            <td>Model: @characteristic.Model</td>
+                            <td>Color: @characteristic.Color</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Resolution: @characteristic.Resolution</td>
+                            <td>Memory: @characteristic.Memory GB</td>
+                            <td>Ram: @characteristic.Ram GB</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Os: @characteristic.Os</td>
+                            <td>Weight: @characteristic.Weight kg</td>
+                            <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             }
         </div>
     </div>
@@ -76,3 +81,15 @@
         </div>
     </div>
 </div>
+<script>
+    function printpart () {
+        var printwin = window.open("");
+        printwin.document.write(document.getElementById("toprint").innerHTML);
+        printwin.document.write(document.getElementById("toprintt").innerHTML);
+        printwin.document.write(document.getElementById("toprinttt").innerHTML);
+        printwin.document.write(document.getElementById("toprintttt").innerHTML);
+        printwin.stop();
+        printwin.print();
+        printwin.close();
+    }
+</script>

@@ -3,7 +3,7 @@
     using TechDess.Data.Models;
     using TechDess.Services.Mapping;
 
-    public class ProductCharacteristicInputModel 
+    public class ProductCharacteristicInputModel : IMapFrom<ProductCharacteristic>
     {
         public string CharacteristicName { get; set; }
 
