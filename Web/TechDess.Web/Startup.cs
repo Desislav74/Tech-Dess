@@ -1,4 +1,7 @@
-﻿namespace TechDess.Web
+﻿using System.Linq;
+using TechDess.Services.Data.Orders;
+
+namespace TechDess.Web
 {
     using System.Reflection;
 
@@ -77,9 +80,10 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<IProductTypesService, ProducTypesService>();
+            services.AddTransient<IProductTypesService, ProductTypesService>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IOrdersService, OrdersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,6 +97,21 @@
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+
+                if (!dbContext.OrderStatuses.Any())
+                {
+                    dbContext.OrderStatuses.Add(new OrderStatus
+                    {
+                        Name = "Active"
+                    });
+
+                    dbContext.OrderStatuses.Add(new OrderStatus
+                    {
+                        Name = "Completed"
+                    });
+
+                    dbContext.SaveChanges();
+                }
             }
 
             if (env.IsDevelopment())

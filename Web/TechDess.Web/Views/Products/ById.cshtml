@@ -1,4 +1,6 @@
-﻿@model TechDess.Web.ViewModels.Products.SingleProductViewModel
+﻿@using CloudinaryDotNet.Actions
+@using TechDess.Common
+@model TechDess.Web.ViewModels.Products.SingleProductViewModel
 @{
     this.ViewData["Title"] = Model.Name;
 }
@@ -8,59 +10,62 @@
 <div class="row">
     <div class="col-sm-6">
         <div id="toprint"> <img class="card-img-top" src="@Model.Image" alt=""></div>
-        <a asp-controller="Products" asp-action="List" class="btn btn-primary text-white btn-lg btn-block">Shop Now</a>
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#orderModal" data-whatever="quantity">Order</button>
+        <div>
+            <button class="btn btn-warning btn-lg btn-block mt-2" onclick="window.printpart()">Print</button>
+            @*@if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {*@
+            <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary mt-2 float-left">Edit</a>
 
             <form method="post" asp-action="DeleteProduct" id="deleteForm" asp-route-id="@Model.Id">
             </form>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-
-            <button class="btn btn-warning" onclick="window.printpart()">Print</button>
+            <button class="btn btn-danger mt-2 float-right" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            @*}*@
         </div>
 
     </div>
     <div class="col-sm-6 ">
         <div class="offset-5">
             <div id="toprintt">
-                <h3>Category: <a asp-controller="Products"asp-action="List"asp-route-id="@Model.ProductTypeId">@Model.ProductTypeName</a> </h3>
+                <h3>Category: <a asp-controller="Products" asp-action="List" asp-route-id="@Model.ProductTypeId">@Model.ProductTypeName</a> </h3>
                 <h4>Price:@Model.Price lv.</h4>
             </div>
+            <hr class=" bg-primary mt-1" />
         </div>
         <div class="offset-5">
             <div id="toprinttt"><h3>Characteristic:</h3></div>
-            
+            <hr class="bg-primary mt-1" />
             @foreach (var characteristic in Model.Characteristics)
             {
                 <div id="toprintttt">
                     <table class="table table-dark">
                         <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Second</th>
-                            <th scope="col">Third</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Second</th>
+                                <th scope="col">Third</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Brand: @characteristic.CharacteristicName</td>
-                            <td>Model: @characteristic.Model</td>
-                            <td>Color: @characteristic.Color</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Resolution: @characteristic.Resolution</td>
-                            <td>Memory: @characteristic.Memory GB</td>
-                            <td>Ram: @characteristic.Ram GB</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Os: @characteristic.Os</td>
-                            <td>Weight: @characteristic.Weight kg</td>
-                            <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
-                        </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Brand: @characteristic.CharacteristicName</td>
+                                <td>Model: @characteristic.Model</td>
+                                <td>Color: @characteristic.Color</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Resolution: @characteristic.Resolution</td>
+                                <td>Memory: @characteristic.Memory GB</td>
+                                <td>Ram: @characteristic.Ram GB</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Os: @characteristic.Os</td>
+                                <td>Weight: @characteristic.Weight kg</td>
+                                <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -81,8 +86,34 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderModalLabel">Product-@Model.Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post"id="orderForm" asp-action="Order">
+                    <div class="form-group">
+                        <label for="quantity" class="col-form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity"name="quantity">
+                        <input type="hidden" value="@Model.Id" name="productId"/>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"onclick="orderForm.submit()">Complete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    function printpart () {
+    function printpart() {
         var printwin = window.open("");
         printwin.document.write(document.getElementById("toprint").innerHTML);
         printwin.document.write(document.getElementById("toprintt").innerHTML);

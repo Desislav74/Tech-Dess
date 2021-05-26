@@ -9,11 +9,11 @@
     using TechDess.Services.Mapping;
     using TechDess.Web.ViewModels.ProductTypes;
 
-    public class ProducTypesService : IProductTypesService
+    public class ProductTypesService : IProductTypesService
     {
         private readonly IDeletableEntityRepository<ProductType> productTypeRepository;
 
-        public ProducTypesService(IDeletableEntityRepository<ProductType> productTypeRepository)
+        public ProductTypesService(IDeletableEntityRepository<ProductType> productTypeRepository)
         {
             this.productTypeRepository = productTypeRepository;
         }

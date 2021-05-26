@@ -1,0 +1,103 @@
+﻿@model TechDess.Web.ViewModels.Orders.ListOrderCartViewModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+<h1 class="text-right text-dark font-weight-bold">Cart</h1>
+<hr class="hr-2" style="height: 2px; background-color: #483d8b;">
+@if ((Model.OrderCartViewModels).Count() == 0)
+{
+    <h2 class="text-center text-dark font-weight-bold">You have no orders in your cart.</h2>
+    <hr class="hr-2" style="background-color: #483d8b;">
+}
+else
+{
+
+    <div id="orders" class="font-weight-bold">
+        <div class="order-info row mt-4">
+            <h3 class="col-md-1 text-left">#</h3>
+            <h3 class="col-md-3 text-left">Image</h3>
+            <h3 class="col-md-2 text-left">Product</h3>
+            <h3 class="col-md-2 text-left">Price</h3>
+            <h3 class="col-md-1 text-left">Quantity</h3>
+            <h3 class="col-md-3 text-right">Update</h3>
+        </div>
+        <hr class="hr-2" style="background-color: #483d8b;">
+        @foreach (var order in Model.OrderCartViewModels)
+        {
+            <div class="order row">
+                <div class="col-md-3">
+                    <img class="img-thumbnail product-cart-image"
+                         src="@order.ProductImage" />
+                </div>
+                <h5 class="col-md-2 text-right">@order.ProductName</h5>
+                <h5 class="col-md-2 text-left offset-1">@order.ProductPrice</h5>
+                <h5 class="col-md-3 text-left">x @order.Quantity</h5>
+                <div class="col-md-1 mx-auto d-flex justify-content-around">
+                    <form asp-action="Reduce" asp-route-id="@order.Id">
+                        <button class="minus-button" id="@order.Id-minus">
+                            <i class="fas fa-minus text-danger h5"></i>
+                        </button>
+                    </form>
+                    <form asp-action="Increase" asp-route-id="@order.Id">
+                        <button class="plus-button" id="@order.Id-plus">
+                            <i class="fas fa-plus text-danger h5"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <hr class="hr-2" style="background-color: #483d8b;">
+        }
+    </div>
+    <form action="/Order/Cart/Complete" method="post" class="d-flex justify-content-between">
+        <button class="btn text-white  font-weight-bold" style="background-color: #483d8b;">Checkout</button>
+        <h2 class="font-weight-bold" id="total-price">Total: @Model.OrderCartViewModels.Sum(order => order.ProductPrice * order.Quantity).ToString("F2")</h2>
+    </form>
+}
+<script>
+    function updateTotalPrice() {
+        // This function updates the total price upon changing the quantity of one product.
+        // Extract all elements with class order (the table rows)
+        let orders = $('.order');
+        // Variable to hold the total price
+        let totalPrice = 0;
+        // Iterate over all othe orders
+        for (let order of orders) {
+            // Extract the element <h5> holding the price
+            let priceElement = $($(order).children()[2]);
+            // Extract the element <h5> holding the quantity
+            let quantityElement = $($(order).children()[3]);
+            // Extract the elements' values
+            let currentPrice = Number($(priceElement).text());
+            let currentQuantity = Number($(quantityElement).text().toString().replace('x', ''));
+            // Calculate the total price
+            totalPrice += currentPrice * currentQuantity;
+        }
+        // Attach the new total price to the total-price element
+        $('#total-price').text('Total: ' + totalPrice.toFixed(2));
+    }
+            //$('.minus-button').click(function () {
+            //    let orderId = $(this).attr('id').toString().replace('-minus', '');
+            //    let element = $($($($(this).parent()).parent()).children()[3]);
+            //    $.post({
+            //        url: `/Orders/${orderId}/Quantity/Reduce`,
+            //        success: function () {
+            //            let currentQuantity = Number(element.text().toString().replace('x', ''));
+            //            element.text('x' + (currentQuantity - 1));
+            //            updateTotalPrice();
+            //        }
+            //    });
+            //});
+            //$('.plus-button').click(function () {
+            //    let orderId = $(this).attr('id').toString().replace('-plus', '');
+            //    let element = $($($($(this).parent()).parent()).children()[3]);
+            //    $.post({
+            //        url: `/Orders/${orderId}/Quantity/Increase`,
+            //        success: function () {
+            //            let currentQuantity = Number(element.text().toString().replace('x', ''));
+            //            element.text('x' + (currentQuantity + 1));
+            //            updateTotalPrice();
+            //        }
+            //    });
+            //});
+</script>

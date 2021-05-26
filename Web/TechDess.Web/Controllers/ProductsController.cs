@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
-using TechDess.Data.Common.Repositories;
-using TechDess.Data.Models;
-
-namespace TechDess.Web.Controllers
+﻿namespace TechDess.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using TechDess.Data.Common.Repositories;
+    using TechDess.Data.Models;
     using TechDess.Services.Data.Cloudinary;
+    using TechDess.Services.Data.Orders;
     using TechDess.Services.Data.Products;
     using TechDess.Services.Data.ProductTypes;
+    using TechDess.Web.ViewModels.Orders;
     using TechDess.Web.ViewModels.Products;
     using TechDess.Web.ViewModels.ProductTypes;
 
@@ -18,12 +20,14 @@ namespace TechDess.Web.Controllers
         private readonly IProductsService productsService;
         private readonly IProductTypesService productTypesService;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IOrdersService ordersService;
 
-        public ProductsController(IProductsService productsService, IProductTypesService productTypesService, ICloudinaryService cloudinaryService)
+        public ProductsController(IProductsService productsService, IProductTypesService productTypesService, ICloudinaryService cloudinaryService, IOrdersService ordersService)
         {
             this.productsService = productsService;
             this.productTypesService = productTypesService;
             this.cloudinaryService = cloudinaryService;
+            this.ordersService = ordersService;
         }
 
         public IActionResult Create()
@@ -138,6 +142,20 @@ namespace TechDess.Web.Controllers
 
             await this.productsService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Order(OrderInputModel input)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var order = new CreateOrderModel()
+            {
+                UserId = userId,
+                ProductId = input.ProductId,
+                Quantity = input.Quantity,
+            };
+            order.StatusId = await this.ordersService.Create(order);
+            return this.RedirectToAction("Cart", "Orders");
         }
     }
 }
