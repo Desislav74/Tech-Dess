@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TechDess.Data.Models;
 
 namespace TechDess.Services.Data.Orders
 {
@@ -15,5 +16,9 @@ namespace TechDess.Services.Data.Orders
         Task<bool> IncreaseQuantity(int orderId);
 
         Task<bool> ReduceQuantity(int orderId);
+
+        Task<bool> CompleteOrder(int orderId);
+
+        Task SetOrdersToReceipt(Receipt receipt);
     }
 }

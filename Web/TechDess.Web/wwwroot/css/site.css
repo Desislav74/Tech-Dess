@@ -118,3 +118,15 @@ body {
 .show {
     display: block;
 }
+
+.shopping-item {
+    float: right;
+}
+
+.shopping-item a:hover {
+    background: #000;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    position: relative;
+}

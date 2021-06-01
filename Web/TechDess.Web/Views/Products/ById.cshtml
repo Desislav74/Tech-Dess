@@ -98,14 +98,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post"id="orderForm" asp-action="Order">
+                <form method="post" id="orderForm" asp-action="Order">
                     <div class="form-group">
                         <label for="quantity" class="col-form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity"name="quantity">
+                        <input type="number" class="form-control" id="quantity" name="quantity"value="1">
                         <input type="hidden" value="@Model.Id" name="productId"/>
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"onclick="orderForm.submit()">Complete</button>
+                    <button type="button" class="btn btn-primary" onclick="orderForm.submit()">Complete</button>
                 </form>
             </div>
         </div>

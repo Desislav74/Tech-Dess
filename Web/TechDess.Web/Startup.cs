@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using TechDess.Services.Data.Orders;
-
-namespace TechDess.Web
+﻿namespace TechDess.Web
 {
+    using System.Linq;
     using System.Reflection;
 
     using CloudinaryDotNet;
@@ -22,8 +20,10 @@ namespace TechDess.Web
     using TechDess.Data.Seeding;
     using TechDess.Services.Data;
     using TechDess.Services.Data.Cloudinary;
+    using TechDess.Services.Data.Orders;
     using TechDess.Services.Data.Products;
     using TechDess.Services.Data.ProductTypes;
+    using TechDess.Services.Data.Receipts;
     using TechDess.Services.Mapping;
     using TechDess.Services.Messaging;
     using TechDess.Web.ViewModels;
@@ -84,6 +84,7 @@ namespace TechDess.Web
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IReceiptsService, ReceiptsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

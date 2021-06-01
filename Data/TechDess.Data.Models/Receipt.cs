@@ -16,6 +16,6 @@
 
         public ApplicationUser User { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

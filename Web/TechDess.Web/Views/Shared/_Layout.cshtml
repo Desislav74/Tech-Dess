@@ -1,4 +1,5 @@
 ﻿@using TechDess.Common
+@using TechDess.Data.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,31 +13,36 @@
     <script src="~/js/fontawesome.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light  border-bottom box-shadow mb-3" style="background-color:#483d8b;">
-            <div class="container">
-                <a class="navbar-brand font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="ProductTypes" asp-action="Create">CreateType</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Create">Create</a>
-                        </li>
-                    </ul>
-                </div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-light  border-bottom box-shadow mb-3" style="background-color: #483d8b;">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial"/>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="ProductTypes" asp-action="Create">CreateType</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Products" asp-action="Create">Create</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+        <div class="col-md-2">
+            <div class="shopping-item">
+                <a asp-controller="Orders"asp-action="Cart">Cart<i class="fa fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </nav>
+</header>
 
     <div class="container">
         <partial name="_CookieConsentPartial" />

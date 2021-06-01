@@ -15,7 +15,7 @@ namespace TechDess.Data.Models
 
         public int ProductTypeId { get; set; }
 
-        public ProductType ProductType { get; set; }
+        public virtual ProductType ProductType { get; set; }
 
         public string Image { get; set; }
 

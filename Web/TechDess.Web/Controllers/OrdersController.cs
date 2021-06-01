@@ -1,4 +1,6 @@
-﻿namespace TechDess.Web.Controllers
+﻿using TechDess.Services.Data.Receipts;
+
+namespace TechDess.Web.Controllers
 {
     using System.Linq;
     using System.Security.Claims;
@@ -12,10 +14,12 @@
     public class OrdersController : Controller
     {
         private readonly IOrdersService ordersService;
+        private readonly IReceiptsService receiptsService;
 
-        public OrdersController(IOrdersService ordersService)
+        public OrdersController(IOrdersService ordersService, IReceiptsService receiptsService)
         {
             this.ordersService = ordersService;
+            this.receiptsService = receiptsService;
         }
 
         public IActionResult Cart()
@@ -57,6 +61,16 @@
             {
                 return this.Forbid();
             }
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Complete()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var receiptId = await this.receiptsService.CreateReceipt(userId);
+            return this.Redirect($"/Receipts/Detail/{receiptId}");
         }
     }
 }

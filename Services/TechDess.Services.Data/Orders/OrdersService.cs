@@ -6,6 +6,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using TechDess.Data.Common.Models;
     using TechDess.Data.Common.Repositories;
     using TechDess.Data.Models;
@@ -42,7 +43,7 @@
         public IEnumerable<T> GetAll<T>()
         {
             var orders = this.orderRepository.All()
-                .OrderBy(x => x.CreatedOn).To<T>().ToList();
+                .OrderByDescending(x => x.CreatedOn).To<T>().ToList();
             return orders;
         }
 
@@ -83,6 +84,33 @@
             int result = await this.orderRepository.SaveChangesAsync();
 
             return result > 0;
+        }
+
+        public async Task<bool> CompleteOrder(int orderId)
+        {
+            var order = await this.orderRepository.All()
+                .SingleOrDefaultAsync(x => x.Id == orderId&&x.Status.Name == "Active");
+
+            if (order == null )
+            {
+                throw new ArgumentException(nameof(order));
+            }
+
+            order.Status = await this.orderStatusRepository.All()
+                .SingleOrDefaultAsync(x => x.Name == "Completed");
+
+            this.orderRepository.Update(order);
+            int result = await this.orderRepository.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+        public async Task SetOrdersToReceipt(Receipt receipt)
+        {
+            var orders = await this.orderRepository.All()
+                .Where(x => x.UserId == receipt.UserId && x.Status.Name == "Active").ToListAsync();
+
+            receipt.Orders = orders;
         }
     }
 }

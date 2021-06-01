@@ -49,7 +49,7 @@ else
             <hr class="hr-2" style="background-color: #483d8b;">
         }
     </div>
-    <form action="/Order/Cart/Complete" method="post" class="d-flex justify-content-between">
+    <form asp-action="Complete"  method="post" class="d-flex justify-content-between">
         <button class="btn text-white  font-weight-bold" style="background-color: #483d8b;">Checkout</button>
         <h2 class="font-weight-bold" id="total-price">Total: @Model.OrderCartViewModels.Sum(order => order.ProductPrice * order.Quantity).ToString("F2")</h2>
     </form>
