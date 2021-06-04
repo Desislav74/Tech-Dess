@@ -2,7 +2,7 @@
 
 
 <h1 class="text-center">Receipt Details</h1>
-<hr class="hr-2 border-5 bg-primary w-50">
+<hr class="hr-2 bbg-primary w-50">
 <div class="products-holder w-50 mx-auto">
     @foreach (var order in Model.Orders)
     {
@@ -11,7 +11,7 @@
                 <h3>@order.ProductName</h3>
             </div>
             <div class="product-quantity-and-price d-flex justify-content-between w-50">
-                <h5 class="text-left w-50">x@(order.Quantity)</h5>
+                <h5 class="text-left w-50">x @order.Quantity</h5>
                 <h5 class="text-right w-50">$@order.ProductPrice.ToString("F2")</h5>
             </div>
         </div>

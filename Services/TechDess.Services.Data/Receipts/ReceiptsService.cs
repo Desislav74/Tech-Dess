@@ -55,7 +55,7 @@ namespace TechDess.Services.Data.Receipts
         {
             var query = this.receiptsRepository.All().AsQueryable()
                 .Where(x => x.UserId == receiptId)
-                .OrderByDescending(x => x.CreatedOn)
+                .OrderBy(x => x.CreatedOn)
                 .To<T>().ToList();
             return query;
         }

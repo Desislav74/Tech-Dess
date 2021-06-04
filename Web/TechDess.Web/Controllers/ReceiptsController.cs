@@ -1,12 +1,13 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+﻿using System.Collections.Generic;
 
 namespace TechDess.Web.Controllers
 {
     using System;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using TechDess.Data.Common.Repositories;
     using TechDess.Data.Models;
@@ -23,6 +24,19 @@ namespace TechDess.Web.Controllers
         {
             this.receiptsService = receiptsService;
             this.ordersService = ordersService;
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var receipts = new ListReceiptProfileViewModel()
+            {
+                ReceiptProfileViewModels = this.receiptsService
+                    .GetAllByRecipientId<ReceiptProfileViewModel>(userId).ToList(),
+            };
+            return this.View(receipts);
         }
 
         [HttpGet]
