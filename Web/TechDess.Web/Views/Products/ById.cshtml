@@ -48,24 +48,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Brand: @characteristic.CharacteristicName</td>
-                                <td>Model: @characteristic.Model</td>
-                                <td>Color: @characteristic.Color</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Resolution: @characteristic.Resolution</td>
-                                <td>Memory: @characteristic.Memory GB</td>
-                                <td>Ram: @characteristic.Ram GB</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Os: @characteristic.Os</td>
-                                <td>Weight: @characteristic.Weight kg</td>
-                                <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
-                            </tr>
+                            @if (Model.ProductTypeName == "Laptops")
+                            {
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Brand: @characteristic.CharacteristicName</td>
+                                    <td>Model: @characteristic.Model</td>
+                                    <td>Color: @characteristic.Color</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Resolution: @characteristic.Resolution</td>
+                                    <td>Memory: @characteristic.Memory GB</td>
+                                    <td>Ram: @characteristic.Ram GB</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Os: @characteristic.Os</td>
+                                    <td>Weight: @characteristic.Weight kg</td>
+                                    <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
+                                </tr>
+                            }
+                            @if (Model.ProductTypeName == "Monitors")
+                            {
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Brand: @characteristic.CharacteristicName</td>
+                                    <td>Model: @characteristic.Model</td>
+                                    <td>Color: @characteristic.Color</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Resolution: @characteristic.Resolution</td>
+                                    <td>ReactionTime: @characteristic.ReactionTime Ms</td>
+                                    <td>Illumination: @characteristic.Illumination Cd/m2</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Weight: @characteristic.Weight kg</td>
+                                    <td>ScreenSizeInInches: @characteristic.ScreenSizeInInches inch</td>
+                                    <td>Technology: @characteristic.Technology</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -52,6 +52,23 @@
                     Resolution = inputCharacteristic.Resolution,
                     Color = inputCharacteristic.Color,
                     ScreenSizeInInches = inputCharacteristic.ScreenSizeInInches,
+                    Battery = inputCharacteristic.Battery,
+                    DualSim = inputCharacteristic.DualSim,
+                    Wifi = inputCharacteristic.Wifi,
+                    Technology = inputCharacteristic.Technology,
+                    D3 = inputCharacteristic.D3,
+                    ReactionTime = inputCharacteristic.ReactionTime,
+                    Illumination = inputCharacteristic.Illumination,
+                    PrintingSpeed = inputCharacteristic.PrintingSpeed,
+                    Format = inputCharacteristic.Format,
+                    Capacity = inputCharacteristic.Capacity,
+                    CoolingPower = inputCharacteristic.CoolingPower,
+                    HeatingPower = inputCharacteristic.HeatingPower,
+                    Speaker = inputCharacteristic.Speaker,
+                    Microphone = inputCharacteristic.Microphone,
+                    Gps = inputCharacteristic.Gps,
+                    Wlan = inputCharacteristic.Wlan,
+                    CallNotificationsAndMessages = inputCharacteristic.CallNotificationsAndMessages,
                 });
             }
 
