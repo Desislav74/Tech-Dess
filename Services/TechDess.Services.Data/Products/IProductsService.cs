@@ -1,11 +1,12 @@
-﻿using System.Linq;
-using TechDess.Data.Models;
+﻿using System.ComponentModel;
 
 namespace TechDess.Services.Data.Products
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using TechDess.Data.Models;
     using TechDess.Web.ViewModels.Products;
 
     public interface IProductsService
@@ -13,6 +14,8 @@ namespace TechDess.Services.Data.Products
         Task<int> CreateAsync(ProductCreateInputModel input, string image);
 
         IEnumerable<T> GetByProductTypes<T>(int id, int page, int itemsPerPage = 6);
+
+        IEnumerable<T> GetByCharacteristics<T>(IEnumerable<int> characteristicIds);
 
         T GetById<T>(int id);
 

@@ -1,0 +1,27 @@
+﻿@model TechDess.Web.ViewModels.SearchProducts.SearchIndexViewModel
+
+@{
+    ViewData["Title"] = "Search products by brand";
+}
+
+<div class="alert alert-light text-center text-primary" role="alert">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<form asp-action="List" method="get">
+    <div class="row">
+        @foreach (var characteristic in Model.Characteristics)
+        {
+            <div class="col-1 text-center">
+                <input id="ingredient_@characteristic.Id"
+                       type="checkbox"
+                       name="Characteristics"
+                       value="@characteristic.Id"
+                       class="form-control" />
+                <label for="ingredient_@characteristic.Id">@characteristic.Name</label>
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-outline-primary">Search</button>
+</form>

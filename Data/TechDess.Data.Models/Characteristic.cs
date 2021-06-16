@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using TechDess.Data.Common.Models;
-
-namespace TechDess.Data.Models
+﻿namespace TechDess.Data.Models
 {
+    using System.Collections.Generic;
+
+    using TechDess.Data.Common.Models;
+
     public class Characteristic : BaseDeletableModel<int>
     {
         public Characteristic()

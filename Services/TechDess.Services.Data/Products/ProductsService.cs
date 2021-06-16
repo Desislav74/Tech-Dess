@@ -87,6 +87,17 @@
             return query;
         }
 
+        public IEnumerable<T> GetByCharacteristics<T>(IEnumerable<int> characteristicIds)
+        {
+            var query = this.productRepository.All().AsQueryable();
+            foreach (var characteristicId in characteristicIds)
+            {
+                query = query.Where(x => x.Characteristics.Any(i => i.CharacteristicId == characteristicId));
+            }
+
+            return query.To<T>().ToList();
+        }
+
         public T GetById<T>(int id)
         {
             var product = this.productRepository.AllAsNoTracking()

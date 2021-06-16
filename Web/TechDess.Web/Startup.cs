@@ -1,4 +1,6 @@
-﻿namespace TechDess.Web
+﻿using TechDess.Services.Data.Characteristics;
+
+namespace TechDess.Web
 {
     using System.Linq;
     using System.Reflection;
@@ -85,6 +87,7 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IReceiptsService, ReceiptsService>();
+            services.AddTransient<ICharacteristicsService, CharacteristicsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

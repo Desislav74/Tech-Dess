@@ -1,10 +1,4 @@
 ﻿@model TechDess.Web.ViewModels.Products.ProductListViewModel
-@{
-    ViewData["Title"] = "Results found";
-}
-<div class="alert alert-light text-center text-primary" role="alert">
-    <h3>@ViewData["Title"]</h3>
-</div>
 
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Order By</button>
@@ -31,7 +25,7 @@ else
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">Price:@product.Price</p>
-                    <a asp-controller="Products" asp-action="ById" asp-route-id="@product.Id" class="btn btn-dark">Specifications</a>
+                    <a asp-controller="Products" asp-action="ById" asp-route-id="@product.Id" class="btn btn-outline-primary">Specifications</a>
                 </div>
             </div>
         }
