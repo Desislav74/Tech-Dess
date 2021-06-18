@@ -35,7 +35,12 @@
             };
             order.Status = this.orderStatusRepository.All()
                 .FirstOrDefault(x => x.Name == "Active");
-            await this.orderRepository.AddAsync(order);
+            if (order.Quantity > 0)
+            {
+                await this.orderRepository.AddAsync(order);
+            }
+
+            //await this.orderRepository.AddAsync(order);
             await this.orderRepository.SaveChangesAsync();
             return order.Id;
         }
@@ -91,7 +96,7 @@
             var order = await this.orderRepository.All()
                 .SingleOrDefaultAsync(x => x.Id == orderId&&x.Status.Name == "Active");
 
-            if (order == null )
+            if (order == null)
             {
                 throw new ArgumentException(nameof(order));
             }
