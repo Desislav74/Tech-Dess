@@ -1,6 +1,4 @@
-﻿using TechDess.Services.Data.Receipts;
-
-namespace TechDess.Web.Controllers
+﻿namespace TechDess.Web.Controllers
 {
     using System.Linq;
     using System.Security.Claims;
@@ -8,6 +6,7 @@ namespace TechDess.Web.Controllers
 
     using Microsoft.AspNetCore.Mvc;
     using TechDess.Services.Data.Orders;
+    using TechDess.Services.Data.Receipts;
     using TechDess.Web.ViewModels.Orders;
     using TechDess.Web.ViewModels.Products;
 
@@ -70,7 +69,7 @@ namespace TechDess.Web.Controllers
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var receiptId = await this.receiptsService.CreateReceipt(userId);
-            return this.Redirect($"/Receipts/Detail/{receiptId}");
+            return this.Redirect($"/Receipts/Profile/{receiptId}");
         }
     }
 }

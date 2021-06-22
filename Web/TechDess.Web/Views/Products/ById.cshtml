@@ -188,11 +188,10 @@
                     <div class="form-group">
                         <label for="quantity" class="col-form-label">Quantity</label>
                         <input type="number"max="@int.MaxValue"min="1"step="1"placeholder="Amount of products" class="form-control" id="quantity" name="quantity">
-                        <span id="quantityHelper" class=" h6"></span>
                         <input type="hidden" value="@Model.Id" name="productId" />
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary"onclick="orderform.submit()">Complete</button>
+                    <button type="button" class="btn btn-primary"onclick="orderForm.submit()">Complete</button>
                 </form>
             </div>
         </div>

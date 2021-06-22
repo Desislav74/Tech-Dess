@@ -1,5 +1,7 @@
 ﻿namespace TechDess.Data.Models
 {
+    using TechDess.Data.Common.Models;
+
     public class ProductCharacteristic
     {
         public int Id { get; set; }

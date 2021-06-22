@@ -36,6 +36,19 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="SearchProducts" asp-action="Index">Search by brand</a>
                     </li>
+                    <li class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Services
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-controller="Services" asp-action="ChooseDevice">How to choose a device</a>
+                            <a class="dropdown-item" asp-controller="Services"asp-action="LoyalOffers">Loyal offers</a>
+                            <a class="dropdown-item" asp-controller="Services" asp-action="Create">Delivery to the courier office</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Create">Installations</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Create">60 days right of return</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Create">Extended warranty</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -47,24 +60,27 @@
     </nav>
 </header>
 
+<div class="container">
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @this.RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
+        &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
+</footer>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    @await this.RenderSectionAsync("Scripts", required: false)
+<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+<script src="~/js/site.min.js" asp-append-version="true"></script>
+@await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    $('.dropdown-toggle').dropdown()
+</script>

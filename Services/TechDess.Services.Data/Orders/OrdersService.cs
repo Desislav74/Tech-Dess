@@ -35,12 +35,8 @@
             };
             order.Status = this.orderStatusRepository.All()
                 .FirstOrDefault(x => x.Name == "Active");
-            if (order.Quantity > 0)
-            {
-                await this.orderRepository.AddAsync(order);
-            }
 
-            //await this.orderRepository.AddAsync(order);
+            await this.orderRepository.AddAsync(order);
             await this.orderRepository.SaveChangesAsync();
             return order.Id;
         }
@@ -94,7 +90,7 @@
         public async Task<bool> CompleteOrder(int orderId)
         {
             var order = await this.orderRepository.All()
-                .SingleOrDefaultAsync(x => x.Id == orderId&&x.Status.Name == "Active");
+                .SingleOrDefaultAsync(x => x.Id == orderId && x.Status.Name == "Active");
 
             if (order == null)
             {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TechDess.Web.Controllers
+﻿namespace TechDess.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -44,14 +42,13 @@ namespace TechDess.Web.Controllers
         {
             string userEmail = this.User.FindFirst(ClaimTypes.Email).Value;
             var viewModel = new ReceiptDetailsViewModel()
-           {
-               Id = input.Id,
-               CreatedOn = DateTime.UtcNow,
-               Recipient = userEmail,
-               Orders = this.ordersService.GetAll<ReceiptDetailsOrderViewModel>()
-                    .Where(x => x.Id == id)
+            {
+                Id = input.Id,
+                CreatedOn = DateTime.UtcNow,
+                Recipient = userEmail,
+                Orders = this.receiptsService.GetAll<ReceiptDetailsOrderViewModel>(id)
                     .ToList(),
-           };
+            };
             return this.View(viewModel);
         }
     }

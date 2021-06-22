@@ -20,7 +20,7 @@ else
     <div class="row">
         @foreach (var product in this.Model.Products)
         {
-            <div class="card col-md-3 border-primary ">
+            <div class="card col-md-3">
                 <img class="card-img-top" src="@product.Image" alt="">
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
@@ -34,13 +34,9 @@ else
     <partial name="_PagingPartial" model="@Model" />
 }
 <script>
-    /* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
-
-// Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");

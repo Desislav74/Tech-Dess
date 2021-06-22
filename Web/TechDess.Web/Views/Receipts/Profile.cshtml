@@ -26,7 +26,7 @@
             <td class="col-md-2 h5">$@(receipt.Total.ToString("F2"))</td>
             <td class="col-md-1 h5">@receipt.Products</td>
             <td class="col-md-3">
-                <a href="/Receipts/Detail/@receipt.Id" class="btn font-weight-bold text-white"style="background-color: #483d8b;">Details</a>
+                <a asp-action="Detail"asp-route-id="@receipt.Id" class="btn font-weight-bold text-white"style="background-color: #483d8b;">Details</a>
             </td>
         </tr>
     }

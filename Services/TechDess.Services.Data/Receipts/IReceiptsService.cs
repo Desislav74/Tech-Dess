@@ -1,4 +1,6 @@
-﻿namespace TechDess.Services.Data.Receipts
+﻿using TechDess.Data.Models;
+
+namespace TechDess.Services.Data.Receipts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -7,7 +9,7 @@
     {
         Task<int> CreateReceipt(string recipientId);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(int id);
 
         IEnumerable<T> GetAllByRecipientId<T>(string receiptId);
     }

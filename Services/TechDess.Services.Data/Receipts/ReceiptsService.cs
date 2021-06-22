@@ -1,7 +1,4 @@
-﻿using TechDess.Web.ViewModels.Orders;
-using TechDess.Web.ViewModels.Receipts;
-
-namespace TechDess.Services.Data.Receipts
+﻿namespace TechDess.Services.Data.Receipts
 {
     using System;
     using System.Collections.Generic;
@@ -12,16 +9,20 @@ namespace TechDess.Services.Data.Receipts
     using TechDess.Data.Models;
     using TechDess.Services.Data.Orders;
     using TechDess.Services.Mapping;
+    using TechDess.Web.ViewModels.Orders;
+    using TechDess.Web.ViewModels.Receipts;
 
     public class ReceiptsService : IReceiptsService
     {
         private readonly IDeletableEntityRepository<Receipt> receiptsRepository;
         private readonly IOrdersService ordersService;
+        private readonly IDeletableEntityRepository<Order> orderRepository;
 
-        public ReceiptsService(IDeletableEntityRepository<Receipt> receiptsRepository, IOrdersService ordersService)
+        public ReceiptsService(IDeletableEntityRepository<Receipt> receiptsRepository, IOrdersService ordersService, IDeletableEntityRepository<Order> orderRepository)
         {
             this.receiptsRepository = receiptsRepository;
             this.ordersService = ordersService;
+            this.orderRepository = orderRepository;
         }
 
         public async Task<int> CreateReceipt(string recipientId)
@@ -44,11 +45,12 @@ namespace TechDess.Services.Data.Receipts
             return receipt.Id;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(int id)
         {
-            var orders = this.receiptsRepository.All()
-                .OrderBy(x => x.CreatedOn).To<T>().ToList();
-            return orders;
+          var orders = this.orderRepository.All()
+              .Where(x=>x.Receipt.Id==id)
+                .To<T>().ToList();
+          return orders;
         }
 
         public IEnumerable<T> GetAllByRecipientId<T>(string receiptId)

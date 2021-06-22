@@ -1,6 +1,4 @@
-﻿using TechDess.Services.Data.Characteristics;
-
-namespace TechDess.Web
+﻿namespace TechDess.Web
 {
     using System.Linq;
     using System.Reflection;
@@ -21,6 +19,7 @@ namespace TechDess.Web
     using TechDess.Data.Repositories;
     using TechDess.Data.Seeding;
     using TechDess.Services.Data;
+    using TechDess.Services.Data.Characteristics;
     using TechDess.Services.Data.Cloudinary;
     using TechDess.Services.Data.Orders;
     using TechDess.Services.Data.Products;

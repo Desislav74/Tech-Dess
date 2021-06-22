@@ -4,6 +4,7 @@
 
     public class Order : BaseDeletableModel<int>
     {
+        public Receipt Receipt { get; set; }
         public int ProductId { get; set; }
 
         public virtual Product Product { get; set; }
