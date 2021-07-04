@@ -105,12 +105,12 @@
                 {
                     dbContext.OrderStatuses.Add(new OrderStatus
                     {
-                        Name = "Active"
+                        Name = "Active",
                     });
 
                     dbContext.OrderStatuses.Add(new OrderStatus
                     {
-                        Name = "Completed"
+                        Name = "Completed",
                     });
 
                     dbContext.SaveChanges();

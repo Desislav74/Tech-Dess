@@ -48,7 +48,7 @@
         public IEnumerable<T> GetAll<T>(int id)
         {
           var orders = this.orderRepository.All()
-              .Where(x=>x.Receipt.Id==id)
+              .Where(x => x.Receipt.Id == id)
                 .To<T>().ToList();
           return orders;
         }

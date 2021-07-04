@@ -26,8 +26,7 @@
             var viewModel = new ListOrderCartViewModel()
             {
                 OrderCartViewModels = this.ordersService.GetAll<OrderCartViewModel>()
-                        .Where(x => x.StatusName == "Active" 
-                                    && x.UserId == this.User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                        .Where(x => x.StatusName == "Active" && x.UserId == this.User.FindFirst(ClaimTypes.NameIdentifier).Value),
             };
             return this.View(viewModel);
         }

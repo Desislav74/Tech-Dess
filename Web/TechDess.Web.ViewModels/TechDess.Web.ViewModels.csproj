@@ -32,6 +32,7 @@
     <ProjectReference Include="..\..\Data\TechDess.Data.Models\TechDess.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\TechDess.Services.Mapping\TechDess.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\TechDess.Services\TechDess.Services.csproj" />
+    <ProjectReference Include="..\TechDess.Web.Infrastructure\TechDess.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
