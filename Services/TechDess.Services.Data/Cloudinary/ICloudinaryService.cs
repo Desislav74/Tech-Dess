@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-
-namespace TechDess.Services.Data.Cloudinary
+﻿namespace TechDess.Services.Data.Cloudinary
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+
     public interface ICloudinaryService
     {
         Task<string> UploadPictureAsync(IFormFile pictureFile, string fileName);

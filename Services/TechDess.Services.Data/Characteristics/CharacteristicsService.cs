@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TechDess.Services.Mapping;
-
-namespace TechDess.Services.Data.Characteristics
+﻿namespace TechDess.Services.Data.Characteristics
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using TechDess.Data.Common.Repositories;
     using TechDess.Data.Models;
+    using TechDess.Services.Mapping;
 
     public class CharacteristicsService : ICharacteristicsService
     {

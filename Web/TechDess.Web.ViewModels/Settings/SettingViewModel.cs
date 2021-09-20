@@ -1,9 +1,8 @@
 ﻿namespace TechDess.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using TechDess.Data.Models;
     using TechDess.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

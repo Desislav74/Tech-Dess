@@ -18,6 +18,8 @@
         [Display(Name = "Product Type")]
         public int ProductTypeId { get; set; }
 
+        public ProductType Type { get; set; }
+
         public IEnumerable<CharacteristicsViewModel> Characteristics { get; set; }
 
         public IEnumerable<ProductTypeDropDownViewModel> ProductTypes { get; set; }

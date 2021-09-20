@@ -16,11 +16,12 @@
             this.cloudinary = cloudinary;
         }
 
+        [System.Obsolete]
         public async Task<string> UploadPictureAsync(IFormFile pictureFile, string fileName)
         {
             byte[] destinationData;
 
-            using (var ms = new MemoryStream())
+            await using (var ms = new MemoryStream())
             {
                 await pictureFile.CopyToAsync(ms);
                 destinationData = ms.ToArray();
@@ -28,9 +29,9 @@
 
             UploadResult uploadResult = null;
 
-            using (var ms = new MemoryStream(destinationData))
+            await using (var ms = new MemoryStream(destinationData))
             {
-                ImageUploadParams uploadParams = new ImageUploadParams
+                var uploadParams = new ImageUploadParams
                 {
                     Folder = "product_images",
                     File = new FileDescription(fileName, ms),

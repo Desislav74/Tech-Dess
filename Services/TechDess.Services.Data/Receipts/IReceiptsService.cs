@@ -1,9 +1,9 @@
-﻿using TechDess.Data.Models;
-
-namespace TechDess.Services.Data.Receipts
+﻿namespace TechDess.Services.Data.Receipts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using TechDess.Data.Models;
 
     public interface IReceiptsService
     {

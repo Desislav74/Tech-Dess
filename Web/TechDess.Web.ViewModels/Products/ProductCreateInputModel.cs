@@ -21,6 +21,8 @@
         [Display(Name = "Product Type")]
         public int ProductTypeId { get; set; }
 
+        public ProductType Type { get; set; }
+
         public IEnumerable<ProductTypeDropDownViewModel> ProductTypes { get; set; }
 
         public IEnumerable<ProductCharacteristicInputModel> Characteristics { get; set; }

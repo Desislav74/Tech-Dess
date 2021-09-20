@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using TechDess.Data.Models;
-
-namespace TechDess.Services.Data.Orders
+﻿namespace TechDess.Services.Data.Orders
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using TechDess.Data.Models;
     using TechDess.Web.ViewModels.Orders;
 
     public interface IOrdersService

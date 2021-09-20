@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace TechDess.Services.Data.Products
+﻿namespace TechDess.Services.Data.Products
 {
     using System.Collections.Generic;
     using System.Linq;

@@ -61,7 +61,7 @@
             order.Quantity++;
 
             this.orderRepository.Update(order);
-            int result = await this.orderRepository.SaveChangesAsync();
+            var result = await this.orderRepository.SaveChangesAsync();
 
             return result > 0;
         }
@@ -82,7 +82,7 @@
             }
 
             this.orderRepository.Update(order);
-            int result = await this.orderRepository.SaveChangesAsync();
+            var result = await this.orderRepository.SaveChangesAsync();
 
             return result > 0;
         }

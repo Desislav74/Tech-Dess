@@ -40,7 +40,7 @@
             }
 
             await this.receiptsRepository.AddAsync(receipt);
-            int result = await this.receiptsRepository.SaveChangesAsync();
+            var result = await this.receiptsRepository.SaveChangesAsync();
 
             return receipt.Id;
         }
@@ -57,7 +57,7 @@
         {
             var query = this.receiptsRepository.All().AsQueryable()
                 .Where(x => x.UserId == receiptId)
-                .OrderBy(x => x.CreatedOn)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>().ToList();
             return query;
         }

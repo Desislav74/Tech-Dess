@@ -67,28 +67,4 @@ else
         }
         $('#total-price').text('Total: ' + totalPrice.toFixed(2));
     }
-            //$('.minus-button').click(function () {
-            //    let orderId = $(this).attr('id').toString().replace('-minus', '');
-            //    let element = $($($($(this).parent()).parent()).children()[3]);
-            //    $.post({
-            //        url: `/Orders/${orderId}/Quantity/Reduce`,
-            //        success: function () {
-            //            let currentQuantity = Number(element.text().toString().replace('x', ''));
-            //            element.text('x' + (currentQuantity - 1));
-            //            updateTotalPrice();
-            //        }
-            //    });
-            //});
-            //$('.plus-button').click(function () {
-            //    let orderId = $(this).attr('id').toString().replace('-plus', '');
-            //    let element = $($($($(this).parent()).parent()).children()[3]);
-            //    $.post({
-            //        url: `/Orders/${orderId}/Quantity/Increase`,
-            //        success: function () {
-            //            let currentQuantity = Number(element.text().toString().replace('x', ''));
-            //            element.text('x' + (currentQuantity + 1));
-            //            updateTotalPrice();
-            //        }
-            //    });
-            //});
 </script>

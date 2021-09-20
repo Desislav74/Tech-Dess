@@ -21,9 +21,11 @@
         {
             configuration
                 .CreateMap<Receipt, ReceiptProfileViewModel>()
-                .ForMember(destination => destination.Total,
+                .ForMember(
+                    destination => destination.Total,
                     opts => opts.MapFrom(origin => origin.Orders.Sum(x => x.Product.Price * x.Quantity)))
-                .ForMember(destination => destination.Products,
+                .ForMember(
+                    destination => destination.Products,
                     opts => opts.MapFrom(origin => origin.Orders.Sum(x => x.Quantity)));
         }
     }

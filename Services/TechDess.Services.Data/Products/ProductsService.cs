@@ -30,6 +30,7 @@
                 Price = input.Price,
                 ProductTypeId = input.ProductTypeId,
                 Image = image,
+                ProductType = input.Type,
             };
 
             foreach (var inputCharacteristic in input.Characteristics)
@@ -134,12 +135,12 @@
 
         public async Task DeleteAsync(int id)
         {
-            var salon =
+            var product =
                 await this.productRepository
                     .All()
                     .Where(x => x.Id == id)
                     .FirstOrDefaultAsync();
-            this.productRepository.Delete(salon);
+            this.productRepository.Delete(product);
             await this.productRepository.SaveChangesAsync();
         }
 
