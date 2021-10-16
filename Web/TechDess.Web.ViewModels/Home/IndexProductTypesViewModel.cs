@@ -4,6 +4,8 @@
 
     public class IndexProductTypesViewModel
     {
+        public string SearchTerm { get; set; }
+
         public IEnumerable<IndexPageProductTypeViewModel> ProductTypes { get; set; }
     }
 }

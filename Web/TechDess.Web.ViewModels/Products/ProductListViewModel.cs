@@ -7,6 +7,8 @@
 
     public class ProductListViewModel : PagingViewModel
     {
+        public string SearchTerm { get; set; }
+
         public IEnumerable<ProductInListViewModel> Products { get; set; }
     }
 }

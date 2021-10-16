@@ -1,0 +1,25 @@
+﻿@model TechDess.Web.ViewModels.Products.ProductListViewModel
+@{
+    ViewData["Title"] = "Results found";
+}
+
+@if (!Model.Products.Any())
+{
+    <h1>Nothing found.</h1>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in this.Model.Products)
+        {
+            <div class="card col-md-3 border-primary ">
+                <img class="card-img-top" src="@product.Image" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">Price:@product.Price</p>
+                    <a asp-controller="Products" asp-action="ById" asp-route-id="@product.Id" class="btn btn-dark">Specifications</a>
+                </div>
+            </div>
+        }
+    </div>
+}

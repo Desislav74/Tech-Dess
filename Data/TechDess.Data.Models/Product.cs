@@ -20,7 +20,6 @@ namespace TechDess.Data.Models
         public string Image { get; set; }
 
         public decimal Price { get; set; }
-
         public virtual ICollection<ProductCharacteristic> Characteristics { get; set; }
     }
 }

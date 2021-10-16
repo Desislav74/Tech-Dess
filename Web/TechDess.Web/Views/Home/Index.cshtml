@@ -1,9 +1,22 @@
 ﻿@using TechDess.Common
 @using TechDess.Data.Models
 @model TechDess.Web.ViewModels.Home.IndexProductTypesViewModel
+
 @{
     this.ViewData["Title"] = "Home Page";
 }
+    <form method="get" asp-controller="Products" asp-action="SearchByTerm" asp-route-searchTerm="@Model.SearchTerm">
+        <div class="row offset-9">
+            <div class="form-group">
+                @*<label asp-for="SearchTerm"></label>*@
+                <input asp-for="SearchTerm" class="form-control" placeholder="Search by text">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="search" />
+            </div>
+        </div>
+        
+    </form>
 
 <div class="text-md-left ">
     <h4>CATEGORIES</h4>

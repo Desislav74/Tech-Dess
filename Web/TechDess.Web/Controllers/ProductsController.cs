@@ -116,6 +116,16 @@
             return this.View(viewModel);
         }
 
+        public IActionResult SearchByTerm(ProductListViewModel input)
+        {
+            var viewModel = new ProductListViewModel()
+            {
+                Products = this.productsService.SearchByTerm<ProductInListViewModel>(input.SearchTerm),
+                SearchTerm = input.SearchTerm,
+            };
+            return this.View(viewModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {

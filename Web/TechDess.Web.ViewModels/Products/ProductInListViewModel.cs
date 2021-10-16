@@ -1,6 +1,5 @@
 ﻿namespace TechDess.Web.ViewModels.Products
 {
-    using Microsoft.AspNetCore.Http;
     using TechDess.Data.Models;
     using TechDess.Services.Mapping;
 

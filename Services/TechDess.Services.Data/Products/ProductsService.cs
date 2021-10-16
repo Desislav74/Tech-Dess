@@ -133,6 +133,19 @@
             return products;
         }
 
+        public IEnumerable<T> SearchByTerm<T>(string searchTerm)
+        {
+            var searchText = searchTerm.Split(' ', '-', ':', ',', ';');
+            var result = string.Concat(searchText).ToLower();
+            var products = this.productRepository.All().AsQueryable().Where(x => (x.ProductType.Name + x.Name).ToLower().Contains(result)
+                    || x.ProductType.Name.ToLower().Contains(result)
+                    || x.Name.ToLower().Contains(result)
+                    || x.Price.ToString().Contains(result)
+                    || (x.Name + x.ProductType.Name).ToLower().Contains(result))
+                .To<T>().ToList();
+            return products;
+        }
+
         public async Task DeleteAsync(int id)
         {
             var product =

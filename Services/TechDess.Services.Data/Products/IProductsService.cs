@@ -17,6 +17,8 @@
 
         T GetById<T>(int id);
 
+        IEnumerable<T> SearchByTerm<T>(string searchTerm);
+
         int GetCount();
 
         IEnumerable<T> GetAllIncreasing<T>(int id, int page, int itemsPerPage = 8);
