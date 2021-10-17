@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace TechDess.Data.Models
+﻿namespace TechDess.Data.Models
 {
+    using System.Collections.Generic;
+
     using TechDess.Data.Common.Models;
 
     public class Product : BaseDeletableModel<int>
@@ -20,6 +20,7 @@ namespace TechDess.Data.Models
         public string Image { get; set; }
 
         public decimal Price { get; set; }
+
         public virtual ICollection<ProductCharacteristic> Characteristics { get; set; }
     }
 }

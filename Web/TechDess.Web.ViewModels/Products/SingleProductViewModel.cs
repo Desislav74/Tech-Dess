@@ -19,6 +19,8 @@
 
         public decimal Price { get; set; }
 
+        public double AverageVote { get; set; }
+
         public IEnumerable<CharacteristicsViewModel> Characteristics { get; set; }
     }
 }

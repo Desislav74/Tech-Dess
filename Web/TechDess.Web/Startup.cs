@@ -1,4 +1,6 @@
-﻿namespace TechDess.Web
+﻿using TechDess.Services.Data.Votes;
+
+namespace TechDess.Web
 {
     using System.Linq;
     using System.Reflection;
@@ -69,7 +71,10 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddSingleton(this.configuration);
 
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -84,6 +89,7 @@
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IReceiptsService, ReceiptsService>();
             services.AddTransient<ICharacteristicsService, CharacteristicsService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

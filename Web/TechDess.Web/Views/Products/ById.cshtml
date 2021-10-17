@@ -156,9 +156,26 @@
                     </table>
                 </div>
             }
+            <h4>Please rate this product.</h4>
+                <fieldset class="item-rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3">3 star</label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1">1 star</label>
+                        <div>
+                            <span>Average rate: </span><span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span>
+                        </div>
+                </fieldset>
         </div>
-    </div>
+        </div>
 </div>
+
 <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -210,3 +227,28 @@
         printwin.close();
     }
 </script>
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
+        $("input[value]").each(function (el) {
+            $(this).click(function() {
+                var value = $(this).attr("value");
+                var productId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = {productId: productId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function(data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json'
+            });
+            });
+        });
+    </script>
+}

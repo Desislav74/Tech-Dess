@@ -121,4 +121,46 @@ body {
     font-size: 18px;
     position: relative;
 }
+.item-rating {
+    float: left;
+    border: none;
+}
+
+.item-rating:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.item-rating:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0 .1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 1.2;
+    color: #ddd;
+}
+
+.item-rating:not(:checked) > label:before {
+        content: '★ ';
+    }
+
+.item-rating > input:checked ~ label {
+        color: #f70;
+    }
+
+.item-rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+        color: gold;
+    }
+
+.item-rating > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .rating > label:hover ~ input:checked ~ label {
+        color: #ea0;
+    }
+
+.item-rating > label:active {
+        position: relative;
+    }
 
