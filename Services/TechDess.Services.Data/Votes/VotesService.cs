@@ -22,21 +22,15 @@
                 .Average(x => x.Value);
         }
 
-        public async Task SetVoteAsync(int productId, string userId, byte value)
+        public async Task SetVoteAsync(int productId, string userId, byte value, bool isProductRatedByUser)
         {
-            var vote = this.votesRepository.All()
-                .FirstOrDefault(x => x.ProductId == productId && x.UserId == userId);
-            if (vote == null)
-            {
-                vote = new Vote
+            var vote = new Vote
                 {
                     ProductId = productId,
                     UserId = userId,
+                    IsProductRatedByUser = true,
                 };
-
-                await this.votesRepository.AddAsync(vote);
-            }
-
+            await this.votesRepository.AddAsync(vote);
             vote.Value = value;
             await this.votesRepository.SaveChangesAsync();
         }

@@ -6,6 +6,6 @@
     {
         double GetAverageVotes(int productId);
 
-        Task SetVoteAsync(int productId, string userId, byte value);
+        Task SetVoteAsync(int productId, string userId, byte value, bool isProductRatedByUser);
     }
 }

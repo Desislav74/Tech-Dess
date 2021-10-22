@@ -1,4 +1,6 @@
-﻿namespace TechDess.Data.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+namespace TechDess.Data.Models
 {
     using TechDess.Data.Common.Models;
 
@@ -13,5 +15,7 @@
         public virtual ApplicationUser User { get; set; }
 
         public byte Value { get; set; }
+
+        public bool IsProductRatedByUser { get; set; }
     }
 }
