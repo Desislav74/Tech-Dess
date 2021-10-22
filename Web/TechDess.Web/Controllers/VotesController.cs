@@ -38,8 +38,10 @@ namespace TechDess.Web.Controllers
                 var averageVotes = this.votesService.GetAverageVotes(input.ProductId);
                 return new PostVoteResponseModel { AverageVote = averageVotes };
             }
-
-            return this.RedirectToAction("ById", "Products", new { id=vote.ProductId });
+            else
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
         }
     }
 }
